@@ -31,11 +31,11 @@ public:
     {
         std::array<std::size_t, sizeof...(N)> dimensions{{N...}};
         std::size_t index = 0;
-        std::size_t mul = 1;
+        std::size_t shift = 1;
         for(size_t i = dimensions.size(); i > 0; --i) 
         {
-            index += indexes[i - 1] * mul;
-            mul *= dimensions[i - 1];
+            index += indexes[i - 1] * shift;
+            shift *= dimensions[i - 1];
         }
         return index;
     }
