@@ -27,7 +27,14 @@ public:
     }
     bool isOneAdditive()
     {
-        return false;
+        if(functionValues[0] != 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
     static std::size_t calculateIndex(const std::array<std::size_t, sizeof...(N)>& indexes)
     {
