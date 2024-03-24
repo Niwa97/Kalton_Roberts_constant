@@ -32,7 +32,7 @@ public:
         {
             return false;
         }
-        if( (functionValues[0] == 1) && (std::abs(functionValues[1]) <= 1)
+        if( (functionValues[0] == 0) && (std::abs(functionValues[1]) <= 1)
         && (std::abs(functionValues[2]) <= 1) && (std::abs(functionValues[3]) <= 1)
         && (std::abs(functionValues[1] + functionValues[2] - functionValues[4]) <= 1) //X_1' u X_2'
         && (std::abs(functionValues[1] + functionValues[3] - functionValues[5]) <= 1) //X_1' u X_3'
