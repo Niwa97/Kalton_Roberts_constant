@@ -109,7 +109,7 @@ private:
 
 int main()
 {
-    std::vector<std::vector<double>> tensors_values;
+    std::vector<TensorFunction<double,3,3,3>> one_additive;
     std::vector<double> V;
     V.push_back(0.0);
     for(int i = 0; i < 26; ++i)
