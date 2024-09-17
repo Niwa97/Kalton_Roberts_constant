@@ -229,6 +229,7 @@ int main()
             }
         }
     }
+    
     std::cout << "Number of one-additive functions " << one_additive.size() << std::endl;
     return 0;
 }
