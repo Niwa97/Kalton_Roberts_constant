@@ -5,7 +5,7 @@
 #include <vector>
 #include <ranges>
 
-constexpr std::size_t N = 23;
+constexpr std::size_t K = 23;
 
 template <std::size_t, typename T>
 using tensor_shape = T;
@@ -29,13 +29,21 @@ public:
         return operator()({ {indexes...} });
     }
 
+    bool isSizePowerOfThree()
+    {
+        long long n = functionValues.size();
+        while (n % 3 == 0)
+            n /= 3;
+        return n == 1;
+    }
+
     bool isOneAdditive()
     {
-        if(functionValues.size() != 27)
+        if(!(this->isSizePowerOfThree()))
         {
             return false;
         }
-        if( (functionValues[0] == 0) && (std::abs(functionValues[1]) <= 1)
+        if( (functionValues[0] == 0) && (std::abs(functionValues[26]) == 3) && (std::abs(functionValues[1]) <= 1)
         && (std::abs(functionValues[2]) <= 1) && (std::abs(functionValues[3]) <= 1)
         && (std::abs(functionValues[1] + functionValues[2] - functionValues[4]) <= 1) //X_1' u X_2'
         && (std::abs(functionValues[1] + functionValues[3] - functionValues[5]) <= 1) //X_1' u X_3'
@@ -129,16 +137,16 @@ private:
 int main()
 {
     auto to_tensor = [](const unsigned long long mask) {
-        std::array<double, 4 + N> arr{0.0, 1.0, 1.0, 1.0};
+        std::array<double, 4 + K> arr{0.0, 1.0, 1.0, 1.0};
 
-        for (std::size_t i = 0; i < N; ++i)
+        for (std::size_t i = 0; i < K; ++i)
             arr[4 + i] = (mask & (1ULL << i)) ? 3.0 : 1.0;
 
         const std::vector<double> vec(arr.begin(), arr.end());
         return TensorFunction<double,3,3,3>(vec);
     };
 
-    constexpr auto all_masks = std::views::iota(0ULL, (1ULL << N));
+    constexpr auto all_masks = std::views::iota(0ULL, (1ULL << K));
     std::vector<TensorFunction<double,3,3,3>> one_additive;
 
     for (const auto mask : all_masks)
